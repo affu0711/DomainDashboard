@@ -1,0 +1,111 @@
+<div class="container shadow-lg p-4 rounded">
+  <h1 class="text-center fw-bold mb-4" style="color:#0d47a1;">🌐 Domain Dashboard</h1>
+
+  <!-- Search Input -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="🔍 Search domain name..."
+        [(ngModel)]="searchText"
+      />
+    </div>
+  </div>
+
+  <!-- Domain Form -->
+  <form class="row g-3 justify-content-center mb-4" (ngSubmit)="addDomain()">
+    <div class="col-md-2">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Domain Name"
+        [(ngModel)]="newDomain.name"
+        name="name"
+        required
+      />
+    </div>
+    <div class="col-md-2">
+      <input
+        type="date"
+        class="form-control"
+        [(ngModel)]="newDomain.expiry"
+        name="expiry"
+        required
+      />
+    </div>
+    <div class="col-md-2">
+      <select
+        class="form-select"
+        [(ngModel)]="newDomain.status"
+        name="status"
+        required
+      >
+        <option value="">Status</option>
+        <option value="Active">Active</option>
+        <option value="Expired">Expired</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Registrar"
+        [(ngModel)]="newDomain.registrar"
+        name="registrar"
+        required
+      />
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary w-100">Add Domain</button>
+    </div>
+  </form>
+
+  <!-- Domain Table -->
+  <div class="table-responsive shadow-sm">
+    <table class="table table-bordered table-striped">
+      <thead class="table-light text-center">
+        <tr>
+          <th>Domain Name</th>
+          <th>Expiry Date</th>
+          <th>Status</th>
+          <th>Registrar</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let domain of filteredDomains"
+          class="text-center align-middle"
+        >
+          <td [ngClass]="{ 'text-danger': domain.status === 'Expired' }">
+            {{ domain.name }}
+          </td>
+          <td>{{ domain.expiry }}</td>
+          <td>
+            <span [ngSwitch]="domain.status">
+              <span *ngSwitchCase="'Active'" class="badge bg-success">✅ Active</span>
+              <span *ngSwitchCase="'Expired'" class="badge bg-danger">❌ Expired</span>
+              <span *ngSwitchDefault class="badge bg-warning text-dark">⚠️ Inactive</span>
+            </span>
+          </td>
+          <td>{{ domain.registrar }}</td>
+          <td>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteDomain(domain.id!)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center mt-4 text-muted" style="font-size: 0.9rem;">
+    © 2025 Watchdog Service – Domain Dashboard
+  </footer>
+</div>

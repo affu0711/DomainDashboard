@@ -1,0 +1,25 @@
+{
+  "domains": [
+    {
+      "id": "bef4",
+      "name": "google",
+      "expiry": "2025-07-03",
+      "status": "Active",
+      "registrar": "google.com"
+    },
+    {
+      "id": "6604",
+      "name": "amazon",
+      "expiry": "2025-06-30",
+      "status": "Expired",
+      "registrar": "amazon.com"
+    },
+    {
+      "id": "5bd8",
+      "name": "microsoft",
+      "expiry": "2025-07-10",
+      "status": "Inactive",
+      "registrar": "microsoft.com"
+    }
+  ]
+}
